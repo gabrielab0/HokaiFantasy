@@ -1,9 +1,11 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 import pygame
+import math
 from pygame import Font, Surface, Rect
 
-from const import COLOR_TITLE_GOLDEN, COLOR_SHADOW_GOLDEN, MENU_OPTION, WIN_WIDTH, COLOR_WHITE, COLOR_BLACK
+from const import COLOR_TITLE_GOLDEN, COLOR_SHADOW_GOLDEN, MENU_OPTION, WIN_WIDTH, COLOR_WHITE, COLOR_BLACK, \
+    COLOR_YELLOW, OUTLINE_COLOR, WIN_HEIGHT
 
 # ===== CONFIGURAÇÃO VISUAL DO MENU =====
 WIDTH, HEIGHT = 768, 432
@@ -18,9 +20,10 @@ TITLE_Y = 120
 class Menu:
     def __init__(self, window):
         self.window = window
+        self.title_time = 0
 
         # Fundo
-        bg = pygame.image.load('./asset/Menubg.png').convert()
+        bg = pygame.image.load('./asset/background1.png').convert_alpha()
         self.bg = pygame.transform.scale(bg, (WIDTH, HEIGHT))
 
         # Fonte do título
@@ -31,10 +34,10 @@ class Menu:
         self.menu_font = pygame.font.SysFont(
             "Times New Roman", 26, bold=True
         )
-        self.menu_font = pygame.font.SysFont("Arial", 20)
+        self.selected_option = 0
 
         # Música (uma vez)
-        pygame.mixer.music.load('./asset/SoundMenu.wav')
+        pygame.mixer.music.load('./asset/SoundMenu.mp3')
         pygame.mixer.music.play(-1)
 
     def draw_text_shadow(self, text, font, color, shadow_color, center):
@@ -54,39 +57,73 @@ class Menu:
         self.window.blit(surf, rect)
 
     def run(self):
-        self.window.blit(self.bg, (0, 0))
 
-        # Sombra do título
-        self.draw_text(
-            "Hokai Fantasy",
-            self.title_font,
-            SHADOW_COLOR,
-            (WIDTH // 2 + 2, TITLE_Y + 2)
+        while True:
+
+            for event in pygame.event.get():
+
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+
+                if event.type == pygame.KEYDOWN:
+
+                    if event.key == pygame.K_DOWN:
+                        self.selected_option = (self.selected_option + 1) % len(MENU_OPTION)
+
+                    if event.key == pygame.K_UP:
+                        self.selected_option = (self.selected_option - 1) % len(MENU_OPTION)
+
+                    if event.key == pygame.K_RETURN:
+                        pygame.display.flip()
+                        pygame.time.delay(50)
+                        return MENU_OPTION[self.selected_option]
+
+            # -------- DESENHO --------
+
+            self.window.fill((0, 0, 0))
+
+            self.window.blit(self.bg, (0, 0))
+
+            overlay = pygame.Surface((WIN_WIDTH, WIN_HEIGHT))
+            overlay.set_alpha(100)
+            overlay.fill((0, 0, 0))
+            self.window.blit(overlay, (0, 0))
+
+            self.title_time += 0.005
+            offset = math.sin(self.title_time) * 5
+
+            TITLE_Y = 120 + offset
 
 
+            # contorno
+            self.draw_text("Hokai Fantasy", self.title_font, OUTLINE_COLOR, (WIDTH // 2 + 2, TITLE_Y))
+            self.draw_text("Hokai Fantasy", self.title_font, OUTLINE_COLOR, (WIDTH // 2 - 2, TITLE_Y))
+            self.draw_text("Hokai Fantasy", self.title_font, OUTLINE_COLOR, (WIDTH // 2, TITLE_Y + 2))
+            self.draw_text("Hokai Fantasy", self.title_font, OUTLINE_COLOR, (WIDTH // 2, TITLE_Y - 2))
 
-        )
-        start_y = 260
-        spacing = 30
+            # título
+            self.draw_text("Hokai Fantasy", self.title_font, TITLE_COLOR, (WIDTH // 2, TITLE_Y))
 
-        for i in range(len(MENU_OPTION)):
-            self.draw_text_shadow(
-                MENU_OPTION[i],
-                self.menu_font,
-                COLOR_WHITE,
-                COLOR_BLACK,
-                (WIN_WIDTH // 2, start_y + spacing * i)
-            )
-        # Título principal
-        self.draw_text(
-            "Hokai Fantasy",
-            self.title_font,
-            TITLE_COLOR,
-            (WIDTH // 2, TITLE_Y)
-        )
+            start_y = 260
+            spacing = 35
 
-        pygame.display.flip()
+            for i in range(len(MENU_OPTION)):
 
+                if i == self.selected_option:
+                    color = COLOR_YELLOW
+                else:
+                    color = COLOR_WHITE
+
+                self.draw_text_shadow(
+                    MENU_OPTION[i],
+                    self.menu_font,
+                    color,
+                    COLOR_BLACK,
+                    (WIN_WIDTH // 2, start_y + spacing * i)
+                )
+
+            pygame.display.flip()
 
 
     def menu_text(
