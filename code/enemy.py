@@ -64,10 +64,7 @@ class Enemy(Entity):
 
     def move(self, player):
 
-        if self.rect.centerx > player.rect.centerx:
-            self.rect.x -= self.speed
-        else:
-            self.rect.x += self.speed
+        self.rect.x -= self.speed
 
     def update(self):
 

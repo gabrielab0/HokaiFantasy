@@ -30,8 +30,6 @@ ENTITY_SPEED = {
     'Player1': 2,
     'Player2': 2,
     'Enemy': 1,
-
-
 }
 
 PLAYER_CONTROLS = {
@@ -50,6 +48,20 @@ PLAYER_CONTROLS = {
         "attack1": pygame.K_KP1,
         "attack2": pygame.K_KP2
     }
+}
+
+ENTITY_HEALTH = {
+    'Level1Bg0': 999,
+    'Level1Bg1': 999,
+    'Level1Bg2': 999,
+    'Level1Bg3': 999,
+    'Level1Bg4': 999,
+    'Level1Bg5': 999,
+    'Level1Bg6': 999,
+    'Level1Bg7': 999,
+    'Player1': 300,
+    'Player2': 300,
+    'Enemy': 50,
 }
 
 

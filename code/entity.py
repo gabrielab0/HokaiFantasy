@@ -10,6 +10,9 @@ import os
 
 import os
 
+from const import ENTITY_HEALTH
+
+
 class Entity(ABC):
 
     def __init__(self, name: str, position: tuple):
@@ -30,6 +33,8 @@ class Entity(ABC):
         self.surf = pygame.transform.scale(self.surf, (738, 432))
         self.rect = self.surf.get_rect(left=position[0], top=position[1])
         self.speed = 0
+        self.name = name
+        self.health = ENTITY_HEALTH[self.name]
 
     def draw(self, window):
         if self.surf:

@@ -5,6 +5,7 @@ import sys
 import pygame
 from pygame import Font, Surface, Rect
 
+from code.entityMediator import EntityMediator
 from code.player import Player
 from code.enemy import Enemy
 from code.entityFactory import EntityFactory
@@ -127,6 +128,9 @@ class Level:
             self.level_text(18, f'entidades: {len(self.entity_list)}', COLOR_WHITE, (10, WIN_HEIGHT - 20))
 
             pygame.display.flip()
+            # Colissions
+            EntityMediator.verify_collision(entity_list=self.entity_list)
+            EntityMediator.verify_health(entity_list=self.entity_list)
         pass
 
 
