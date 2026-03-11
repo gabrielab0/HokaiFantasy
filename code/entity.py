@@ -8,6 +8,8 @@ import pygame.image
 
 import os
 
+import os
+
 class Entity(ABC):
 
     def __init__(self, name: str, position: tuple):
@@ -16,12 +18,22 @@ class Entity(ABC):
         name = name.replace('.png', '')
         name = name.rstrip('.')
 
-        path = os.path.join('asset', name + '.png')
+        path_character = f'asset/{name}/idle.png'
+        path_background = f'asset/{name}.png'
+
+        if os.path.exists(path_character):
+            path = path_character
+        else:
+            path = path_background
 
         self.surf = pygame.image.load(path).convert_alpha()
         self.surf = pygame.transform.scale(self.surf, (738, 432))
         self.rect = self.surf.get_rect(left=position[0], top=position[1])
         self.speed = 0
+
+    def draw(self, window):
+        if self.surf:
+            window.blit(self.surf, self.rect)
 
     @abstractmethod
     def move(self):

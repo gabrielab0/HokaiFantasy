@@ -1,4 +1,4 @@
-
+import pygame
 # C
 
 COLOR_TITLE_GOLDEN = (240, 200, 120)
@@ -27,7 +27,29 @@ ENTITY_SPEED = {
     'Level1Bg5': 2,
     'Level1Bg6': 2.5,
     'Level1Bg7': 2.5,
+    'Player1': 2,
+    'Player2': 2,
+    'Enemy': 1,
 
+
+}
+
+PLAYER_CONTROLS = {
+    "Player1": {
+        "left": pygame.K_a,
+        "right": pygame.K_d,
+        "jump": pygame.K_SPACE,
+        "attack1": pygame.K_j,
+        "attack2": pygame.K_k
+    },
+
+    "Player2": {
+        "left": pygame.K_LEFT,
+        "right": pygame.K_RIGHT,
+        "jump": pygame.K_UP,
+        "attack1": pygame.K_KP1,
+        "attack2": pygame.K_KP2
+    }
 }
 
 
