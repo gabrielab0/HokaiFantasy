@@ -27,9 +27,11 @@ ENTITY_SPEED = {
     'Level1Bg5': 2,
     'Level1Bg6': 2.5,
     'Level1Bg7': 2.5,
-    'Player1': 2,
-    'Player2': 2,
-    'Enemy': 1,
+    'Enemy': 3,
+    'Player1': 5,
+    'Player2': 5,
+    'DarkFire': 10,
+    'FireFox': 10
 }
 
 PLAYER_CONTROLS = {
@@ -38,7 +40,8 @@ PLAYER_CONTROLS = {
         "right": pygame.K_d,
         "jump": pygame.K_SPACE,
         "attack1": pygame.K_j,
-        "attack2": pygame.K_k
+        "attack2": pygame.K_k,
+         "shoot": pygame.K_f,
     },
 
     "Player2": {
@@ -46,8 +49,10 @@ PLAYER_CONTROLS = {
         "right": pygame.K_RIGHT,
         "jump": pygame.K_UP,
         "attack1": pygame.K_KP1,
-        "attack2": pygame.K_KP2
+        "attack2": pygame.K_KP2,
+        "shoot": pygame.K_KP3,
     }
+
 }
 
 ENTITY_HEALTH = {
@@ -62,6 +67,8 @@ ENTITY_HEALTH = {
     'Player1': 300,
     'Player2': 300,
     'Enemy': 50,
+    'DarkFire': 1,
+    'FireFox': 1,
 }
 
 

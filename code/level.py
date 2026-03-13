@@ -10,7 +10,9 @@ from code.player import Player
 from code.enemy import Enemy
 from code.entityFactory import EntityFactory
 from code.entity import Entity
+from code.projectile import Projectile
 from const import COLOR_WHITE, WIN_HEIGHT, MENU_OPTION
+from const import PLAYER_CONTROLS
 
 
 class Level:
@@ -38,7 +40,8 @@ class Level:
             "right": pygame.K_d,
             "jump": pygame.K_SPACE,
             "attack1": pygame.K_j,
-            "attack2": pygame.K_k
+            "attack2": pygame.K_k,
+            "shoot": pygame.K_f,
         }
 
         player2_controls = {
@@ -46,7 +49,8 @@ class Level:
             "right": pygame.K_RIGHT,
             "jump": pygame.K_UP,
             "attack1": pygame.K_KP1,
-            "attack2": pygame.K_KP2
+            "attack2": pygame.K_KP2,
+            "shoot": pygame.K_KP3,
         }
 
         # modo 1 jogador
@@ -61,11 +65,11 @@ class Level:
         # modo 2 jogadores
         elif game_mode in [MENU_OPTION[1], MENU_OPTION[2]]:
             self.entity_list.append(
-                Player("Player1", (200, 200), player1_controls)
+                Player("Player1", (200, 380), player1_controls)
             )
 
             self.entity_list.append(
-                Player("Player2", (250, 250), player2_controls)
+                Player("Player2", (350, 380), player2_controls)
             )
 
             self.entity_list.append(
@@ -100,26 +104,43 @@ class Level:
                 bg.move()
                 bg.draw(self.window)
 
-            player = self.entity_list[0]
+            player = None
+
+            for ent in self.entity_list:
+                if isinstance(ent, Player):
+                    player = ent
+                    break
 
             # movimento das entidades
-            for entity in self.entity_list:
+            for entity in self.entity_list[:]:  # itera sobre cópia da lista
+                if isinstance(entity, Player):
+                    projectile = entity.move()
+                    if projectile:
+                        self.entity_list.append(projectile)
+                    entity.update()
 
-                if isinstance(entity, Enemy):
-                    entity.move(player)
-                else:
-                    entity.move()
+                elif isinstance(entity, Enemy):
+                    entity.update()
+
+                elif isinstance(entity, Projectile):
+                    entity.update()
+                    if entity.health <= 0:  # remove projétil quando acabar
+                        self.entity_list.remove(entity)
 
             # atualização e desenho
             for entity in self.entity_list:
-                entity.update()
-                entity.draw(self.window)
+
+                if isinstance(entity, Enemy):
+                    self.window.blit(entity.get_surf(), entity.rect)
+                else:
+                    self.window.blit(entity.surf, entity.rect)
 
             current_time = pygame.time.get_ticks()
 
             if current_time - self.spawn_time > self.spawn_delay:
                     self.spawn_enemy()
                     self.spawn_time = current_time
+
 
 
             # textos

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
+from code import player
 from code.entity import Entity
 from const import ENTITY_SPEED, WIN_WIDTH
 
@@ -20,6 +20,7 @@ class Enemy(Entity):
         self.velocity_y = 0
         self.gravity = 0.8
         self.is_jumping = False
+        self.hit_timer = 0
 
         ENEMY_ANIMATIONS = {
             "Enemy": {
@@ -46,6 +47,15 @@ class Enemy(Entity):
         self.surf = self.animations["idle"][0]
         self.rect = self.surf.get_rect(midbottom=position)
 
+    def get_surf(self):
+
+            if self.hit_timer > 0:
+                self.surf.set_alpha(120)
+            else:
+                self.surf.set_alpha(255)
+
+            return self.surf
+
     def load_animation(self, path, frames):
 
         sheet = pygame.image.load(path).convert_alpha()
@@ -67,6 +77,12 @@ class Enemy(Entity):
         self.rect.x -= self.speed
 
     def update(self):
+
+        if self.hit_timer > 0:
+            self.hit_timer -= 1
+
+        self.move(player)
+        self.update_animation()
 
         # gravidade
         self.velocity_y += self.gravity
@@ -102,3 +118,4 @@ class Enemy(Entity):
 
         self.rect = self.surf.get_rect()
         self.rect.midbottom = pos
+

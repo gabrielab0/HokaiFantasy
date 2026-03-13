@@ -2,17 +2,23 @@
 # -*- coding: utf-8 -*-
 
 from code.entity import Entity
-from const import WIN_WIDTH
-from const import ENTITY_SPEED
+
 
 import pygame
 
+from const import WIN_WIDTH, WIN_HEIGHT, ENTITY_SPEED
+
+
 class Background(Entity):
 
-    def __init__(self, name: str):
-        super().__init__(name, (0, 0))
+    def __init__(self, name, position):
+        super().__init__(name, position)
+
         self.scroll = 0
-        self.name = name
+
+        # escala correta do fundo
+        self.surf = pygame.transform.scale(self.surf, (WIN_WIDTH, WIN_HEIGHT))
+        self.rect = self.surf.get_rect(topleft=position)
 
     def move(self):
         self.scroll -= ENTITY_SPEED[self.name]
