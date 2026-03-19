@@ -21,9 +21,9 @@ class Player(Entity):
 
         # controles
         self.controls = controls
-
         # velocidade
         self.speed = 5
+        self.hit_timer = 0
 
         # pulo
         self.velocity_y = 0
@@ -37,12 +37,14 @@ class Player(Entity):
         PLAYER_ANIMATIONS = {
             "Player1": {
                 "idle": ("asset/Player1/idle.png", 8),
-                "jump": ("asset/Player1/Jump.png", 10),
+                "walk": ("asset/Player1/walk.png", 8),
+                "jump": ("asset/Player1/jump.png", 10),
                 "attack1": ("asset/Player1/attack1.png", 10)
             },
 
             "Player2": {
                 "idle": ("asset/Player2/idle.png", 6),
+                "walk": ("asset/Player2/walk.png", 8),
                 "jump": ("asset/Player2/jump.png", 15),
                 "attack1": ("asset/Player2/attack1.png",6),
                 "attack2": ("asset/Player2/attack2.png", 4),
@@ -89,11 +91,22 @@ class Player(Entity):
         keys = pygame.key.get_pressed()
 
         # movimento
+        moving = False
+
         if keys[self.controls["right"]]:
             self.rect.x += self.speed
+            self.facing_right = True
+            moving = True
 
         if keys[self.controls["left"]]:
             self.rect.x -= self.speed
+            self.facing_right = False
+            moving = True
+
+        if moving and not self.is_jumping:
+            self.state = "walk"
+        elif not self.is_jumping:
+            self.state = "idle"
 
         # pulo
         if keys[self.controls["jump"]] and not self.is_jumping:
@@ -145,6 +158,14 @@ class Player(Entity):
         # gravidade
         self.velocity_y += self.gravity
         self.rect.y += self.velocity_y
+
+        if self.hit_timer > 0:
+            self.hit_timer -= 1
+            if self.hit_timer > 0:
+                self.surf.set_alpha(120)
+            else:
+                self.surf.set_alpha(255)
+
         if self.is_jumping:
             self.state = "jump"
 
@@ -174,3 +195,12 @@ class Player(Entity):
 
         self.surf = frames[int(self.frame_index)]
         self.rect = self.surf.get_rect(midbottom=pos)
+
+        # limites da tela
+        screen_width = pygame.display.get_surface().get_width()
+
+        if self.rect.left < 0:
+            self.rect.left = 0
+
+        if self.rect.right > screen_width:
+            self.rect.right = screen_width

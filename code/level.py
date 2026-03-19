@@ -11,7 +11,7 @@ from code.enemy import Enemy
 from code.entityFactory import EntityFactory
 from code.entity import Entity
 from code.projectile import Projectile
-from const import COLOR_WHITE, WIN_HEIGHT, MENU_OPTION
+from const import C_WHITE, WIN_HEIGHT, MENU_OPTION, C_GREEN, C_CYAN
 from const import PLAYER_CONTROLS
 
 
@@ -91,6 +91,8 @@ class Level:
 
         while self.running:
 
+
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -112,7 +114,8 @@ class Level:
                     break
 
             # movimento das entidades
-            for entity in self.entity_list[:]:  # itera sobre cópia da lista
+            for entity in self.entity_list[:]:
+
                 if isinstance(entity, Player):
                     projectile = entity.move()
                     if projectile:
@@ -124,8 +127,25 @@ class Level:
 
                 elif isinstance(entity, Projectile):
                     entity.update()
-                    if entity.health <= 0:  # remove projétil quando acabar
+                    if entity.health <= 0:
                         self.entity_list.remove(entity)
+
+            for entity in self.entity_list:
+                if isinstance(entity, Player):
+
+                    if entity.name == "Player1":
+                        self.level_text(20,
+                                        f'Player1 - Health: {entity.health}| Score : {entity.score}',
+                                        C_GREEN,
+                                        (10, 25)
+                                        )
+
+                    elif entity.name == "Player2":
+                        self.level_text(20,
+                                        f'Player2 - Health: {entity.health} | Score : {entity.score}',
+                                        C_CYAN,
+                                        (10, 45)
+                                        )
 
             # atualização e desenho
             for entity in self.entity_list:
@@ -141,12 +161,17 @@ class Level:
                     self.spawn_enemy()
                     self.spawn_time = current_time
 
+            EntityMediator.verify_collision(self.entity_list)
+            EntityMediator.verify_health(self.entity_list)
+
+
+
 
 
             # textos
-            self.level_text(18, f'{self.name} - Timeout: {self.timeout / 1000 :.1f}s', COLOR_WHITE, (10, 5))
-            self.level_text(18, f'fps: {self.clock.get_fps():.0f}', COLOR_WHITE, (10, WIN_HEIGHT - 35))
-            self.level_text(18, f'entidades: {len(self.entity_list)}', COLOR_WHITE, (10, WIN_HEIGHT - 20))
+            self.level_text(18, f'{self.name} - Timeout: {self.timeout / 1000 :.1f}s', C_WHITE, (10, 5))
+            self.level_text(18, f'fps: {self.clock.get_fps():.0f}', C_WHITE, (10, WIN_HEIGHT - 35))
+            self.level_text(18, f'entidades: {len(self.entity_list)}', C_WHITE, (10, WIN_HEIGHT - 20))
 
             pygame.display.flip()
             # Colissions

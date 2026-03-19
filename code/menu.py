@@ -4,14 +4,14 @@ import pygame
 import math
 from pygame import Font, Surface, Rect
 
-from const import COLOR_TITLE_GOLDEN, COLOR_SHADOW_GOLDEN, MENU_OPTION, WIN_WIDTH, COLOR_WHITE, COLOR_BLACK, \
-    COLOR_YELLOW, OUTLINE_COLOR, WIN_HEIGHT
+from const import C_TITLE_GOLDEN, C_SHADOW_GOLDEN, MENU_OPTION, WIN_WIDTH, C_WHITE, C_BLACK, \
+    C_YELLOW, OUTLINE_COLOR, WIN_HEIGHT
 
 # ===== CONFIGURAÇÃO VISUAL DO MENU =====
 WIDTH, HEIGHT = 768, 432
 
-TITLE_COLOR = (COLOR_TITLE_GOLDEN)
-SHADOW_COLOR = (COLOR_SHADOW_GOLDEN)
+TITLE_COLOR = (C_TITLE_GOLDEN)
+SHADOW_COLOR = (C_SHADOW_GOLDEN)
 
 TITLE_Y = 120
 
@@ -111,15 +111,15 @@ class Menu:
             for i in range(len(MENU_OPTION)):
 
                 if i == self.selected_option:
-                    color = COLOR_YELLOW
+                    color = C_YELLOW
                 else:
-                    color = COLOR_WHITE
+                    color = C_WHITE
 
                 self.draw_text_shadow(
                     MENU_OPTION[i],
                     self.menu_font,
                     color,
-                    COLOR_BLACK,
+                    C_BLACK,
                     (WIN_WIDTH // 2, start_y + spacing * i)
                 )
 

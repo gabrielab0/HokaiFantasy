@@ -1,11 +1,13 @@
 import pygame
 # C
 
-COLOR_TITLE_GOLDEN = (240, 200, 120)
-COLOR_SHADOW_GOLDEN = (80, 60, 30)
-COLOR_WHITE = (255, 255, 255)
-COLOR_BLACK = (0, 0, 0)
-COLOR_YELLOW = (255, 255, 0)# sombra
+C_TITLE_GOLDEN = (240, 200, 120)
+C_SHADOW_GOLDEN = (80, 60, 30)
+C_WHITE = (255, 255, 255)
+C_BLACK = (0, 0, 0)
+C_YELLOW = (255, 255, 0)# sombra
+C_GREEN = (0, 128, 0)
+C_CYAN = (0, 128, 128)
 
 #O
 OUTLINE_COLOR = (80, 40, 0)
@@ -55,6 +57,24 @@ PLAYER_CONTROLS = {
 
 }
 
+ENTITY_DAMAGE = {
+    'Level1Bg0': 0,
+    'Level1Bg1': 0,
+    'Level1Bg2': 0,
+    'Level1Bg3': 0,
+    'Level1Bg4': 0,
+    'Level1Bg5': 0,
+    'Level1Bg6': 0,
+    'Level1Bg7': 0,
+    'Player1': 1,
+    'Player1Shot': 25,
+    'Player2': 1,
+    'Player2Shot': 25,
+    'Enemy': 10,
+    'DarkFire': 1,
+    'FireFox': 1,
+}
+
 ENTITY_HEALTH = {
     'Level1Bg0': 999,
     'Level1Bg1': 999,
@@ -64,11 +84,28 @@ ENTITY_HEALTH = {
     'Level1Bg5': 999,
     'Level1Bg6': 999,
     'Level1Bg7': 999,
-    'Player1': 300,
-    'Player2': 300,
-    'Enemy': 50,
+    'Player1': 50,
+    'Player2': 50,
+    'Enemy': 5,
     'DarkFire': 1,
     'FireFox': 1,
+}
+
+ENTITY_SCORE = {
+    'Level1Bg0': 0,
+    'Level1Bg1': 0,
+    'Level1Bg2': 0,
+    'Level1Bg3': 0,
+    'Level1Bg4': 0,
+    'Level1Bg5': 0,
+    'Level1Bg6': 0,
+    'Level1Bg7': 0,
+    'Player1': 0,
+    'Player2': 0,
+    'Projectile': 0,
+    'FireFox': 0,
+    'DarkFire': 0,
+    'Enemy': 100,
 }
 
 
