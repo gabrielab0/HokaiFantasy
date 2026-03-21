@@ -25,9 +25,16 @@ class Game:
             menu_return = self.menu.run()
 
             if menu_return in [MENU_OPTION[0], MENU_OPTION[1], MENU_OPTION[2]]:
+                player_score = [0, 0] # [Player1, Player2]
 
-                level = Level(self.window, 'Level1', menu_return)
+                # LEVEL 1
+                level = Level(self.window, 'Level1', menu_return, player_score)
+                passou = level.run()
 
+                # LEVEL 2
+                if passou:
+                    level = Level(self.window, 'Level2', menu_return, player_score)
+                    level.run()
 
 
                 for bg in level.backgrounds:
@@ -35,7 +42,7 @@ class Game:
 
                 pygame.display.flip()
 
-                level.run()
+
 
             elif menu_return == MENU_OPTION[4]:
                 self.running = False

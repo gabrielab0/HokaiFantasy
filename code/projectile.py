@@ -38,7 +38,7 @@ class Projectile(Entity):
         self.life_time = 140
 
     def move(self):
-        self.rect.x += self.speed * self.direction
+        self.rect.x += self.speed
 
     def animate(self):
         self.frame_index += 0.35
@@ -48,7 +48,6 @@ class Projectile(Entity):
         self.surf = self.frames[int(self.frame_index)]
 
     def update(self):
-
         self.move()
         self.animate()
 

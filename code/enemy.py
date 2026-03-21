@@ -72,16 +72,17 @@ class Enemy(Entity):
 
         return animation
 
-    def move(self, player):
-
-        self.rect.x -= self.speed
+    def move(self):
+        self.rect.x += self.speed * self.direction
+        self.direction = -1
 
     def update(self):
+        self.move()
 
         if self.hit_timer > 0:
             self.hit_timer -= 1
 
-        self.move(player)
+
         self.update_animation()
 
         # gravidade

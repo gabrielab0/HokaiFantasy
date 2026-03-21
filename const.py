@@ -29,11 +29,20 @@ ENTITY_SPEED = {
     'Level1Bg5': 2,
     'Level1Bg6': 2.5,
     'Level1Bg7': 2.5,
+    'Level2Bg0': 1,
+    'Level2Bg1': 2,
+    'Level2Bg2': 2.5,
+    'Level2Bg3': 3,
+    'Level2Bg4': 3.5,
+
+
     'Enemy': 3,
     'Player1': 5,
     'Player2': 5,
     'DarkFire': 10,
-    'FireFox': 10
+    'FireFox': 10,
+
+
 }
 
 PLAYER_CONTROLS = {
@@ -66,6 +75,12 @@ ENTITY_DAMAGE = {
     'Level1Bg5': 0,
     'Level1Bg6': 0,
     'Level1Bg7': 0,
+    'Level2Bg0': 0,
+    'Level2Bg1': 0,
+    'Level2Bg2': 0,
+    'Level2Bg3': 0,
+    'Level2Bg4': 0,
+
     'Player1': 1,
     'Player1Shot': 25,
     'Player2': 1,
@@ -84,11 +99,18 @@ ENTITY_HEALTH = {
     'Level1Bg5': 999,
     'Level1Bg6': 999,
     'Level1Bg7': 999,
+    'Level2Bg0': 999,
+    'Level2Bg1': 999,
+    'Level2Bg2': 999,
+    'Level2Bg3': 999,
+    'Level2Bg4': 999,
+
     'Player1': 50,
     'Player2': 50,
     'Enemy': 5,
     'DarkFire': 1,
     'FireFox': 1,
+
 }
 
 ENTITY_SCORE = {
@@ -100,6 +122,12 @@ ENTITY_SCORE = {
     'Level1Bg5': 0,
     'Level1Bg6': 0,
     'Level1Bg7': 0,
+    'Level2Bg0': 0,
+    'Level2Bg1': 0,
+    'Level2Bg2': 0,
+    'Level2Bg3': 0,
+    'Level2Bg4': 0,
+
     'Player1': 0,
     'Player2': 0,
     'Projectile': 0,
@@ -108,7 +136,9 @@ ENTITY_SCORE = {
     'Enemy': 100,
 }
 
-
+#T
+TIMEOUT_STEP = 100
+TIMEOUT_LEVEL = 10000
 
 # W
 WIN_WIDTH = 768
