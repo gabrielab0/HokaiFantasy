@@ -38,8 +38,7 @@ class Projectile(Entity):
         self.life_time = 140
 
     def move(self):
-        self.rect.x += self.speed
-
+        self.rect.x += self.speed * self.direction
     def animate(self):
         self.frame_index += 0.35
         if self.frame_index >= len(self.frames):

@@ -5,6 +5,7 @@ import pygame
 from pygame import window
 
 from code.menu import Menu
+from code.score import Score
 from const import WIN_WIDTH, WIN_HEIGHT, MENU_OPTION
 from code.level import Level
 
@@ -21,6 +22,7 @@ class Game:
 
     def run(self):
         while self.running:
+            score = Score(self.window)
 
             menu_return = self.menu.run()
 
@@ -34,7 +36,9 @@ class Game:
                 # LEVEL 2
                 if passou:
                     level = Level(self.window, 'Level2', menu_return, player_score)
-                    level.run()
+                    level_return = level.run()
+                    if level_return:
+                        score.save(menu_return, player_score)
 
 
                 for bg in level.backgrounds:
@@ -42,7 +46,8 @@ class Game:
 
                 pygame.display.flip()
 
-
+            elif menu_return == MENU_OPTION[3]:
+                score.show()
 
             elif menu_return == MENU_OPTION[4]:
                 self.running = False

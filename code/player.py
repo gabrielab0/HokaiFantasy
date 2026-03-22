@@ -11,6 +11,7 @@ from code.entity import Entity
 import os
 
 from code.projectile import Projectile
+from const import WIN_WIDTH
 
 
 class Player(Entity):
@@ -130,23 +131,35 @@ class Player(Entity):
         if self.shoot_cooldown > 0:
             self.shoot_cooldown -= 1
 
+            if self.rect.left < 0:
+                self.rect.left = 0
+
+            if self.rect.right > WIN_WIDTH:
+                self.rect.right = WIN_WIDTH
+
         if shoot_key is not None and keys[shoot_key]:
 
             if self.shoot_cooldown == 0:
 
                 direction = 1 if self.facing_right else -1
 
+                # ✅ TROCA FOI AQUI
+                if direction == 1:
+                    spawn_x = self.rect.right
+                else:
+                    spawn_x = self.rect.left
+
                 if self.name == "Player1":
                     projectile = Projectile(
                         "FireFox",
-                        (self.rect.centerx + 120 * direction, self.rect.centery - 10),
+                        (spawn_x, self.rect.centery - 10),
                         direction
                     )
 
                 elif self.name == "Player2":
                     projectile = Projectile(
                         "DarkFire",
-                        (self.rect.centerx + 120 * direction, self.rect.centery - 10),
+                        (spawn_x, self.rect.centery - 10),
                         direction
                     )
 
@@ -204,3 +217,23 @@ class Player(Entity):
 
         if self.rect.right > screen_width:
             self.rect.right = screen_width
+
+        # ✅ AGORA salva posição correta
+        pos = self.rect.midbottom
+
+        # animação
+        if self.state != self.prev_state:
+            self.frame_index = 0
+            self.prev_state = self.state
+
+        frames = self.animations.get(self.state, self.animations["idle"])
+
+        self.frame_index += self.animation_speed
+        if self.frame_index >= len(frames):
+            self.frame_index = 0
+
+        self.surf = frames[int(self.frame_index)]
+
+        self.rect = self.surf.get_rect()
+        self.rect.x = pos[0] - self.rect.width // 2
+        self.rect.bottom = pos[1]

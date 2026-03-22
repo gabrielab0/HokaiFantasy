@@ -24,6 +24,7 @@ class Level:
         self.backgrounds = EntityFactory.get_entity(f'{self.name}Bg')
         self.player_score = player_score
 
+
         if self.backgrounds is None:
             self.backgrounds = []
 
@@ -41,10 +42,6 @@ class Level:
         self.spawn_delay = 5000  # 5 segundos
         self.max_enemies = 3
         self.start_time = pygame.time.get_ticks()
-
-
-
-
 
         # controles
         player1_controls = {
@@ -102,6 +99,8 @@ class Level:
                     self.entity_list.append(enemy)
 
     def run(self):
+
+
 
 
         pygame.mixer_music.load(f'./asset/{self.name}.wav')
@@ -223,12 +222,10 @@ class Level:
 
             pygame.display.flip()
 
-
             # Colissions
             EntityMediator.verify_collision(entity_list=self.entity_list)
             EntityMediator.verify_health(entity_list=self.entity_list)
         pass
-
 
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
             text_font: Font = pygame.font.SysFont(name=" Lucida sans Typewriter", size=text_size)
@@ -237,4 +234,6 @@ class Level:
             self.window.blit(source=text_surf, dest=text_rect)
 
             self.clock.tick(60)
+
+
 
