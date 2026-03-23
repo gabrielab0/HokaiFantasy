@@ -33,14 +33,15 @@
 🎮 Pygame
 🖼️ Sprites 2D
 🔊 pygame.mixer
+
 📦 Como rodar
+
 git clone https://github.com/gabrielab0/HokaiFantasy.git
 
 cd HokaiFantasy
-
 pip install pygame
-
 python main.py
+
 🎯 Controles
 Ação	Tecla
 Andar	A / D Player 1
