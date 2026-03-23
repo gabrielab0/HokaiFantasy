@@ -21,6 +21,55 @@
 
 ---
 
+✨ Funcionalidades
+🎮 Sistema de movimentação (andar/pular)
+⚔️ Sistema de combate
+🎭 Animações (idle, run, jump)
+🌄 Background com parallax
+👾 Spawn de inimigos
+🔊 Sons e música
+🚀 Tecnologias
+🐍 Python
+🎮 Pygame
+🖼️ Sprites 2D
+🔊 pygame.mixer
+📦 Como rodar
+git clone https://github.com/gabrielab0/HokaiFantasy.git
+
+cd HokaiFantasy
+
+pip install pygame
+
+python main.py
+🎯 Controles
+Ação	Tecla
+Andar	A / D Player 1
+Andar ->  <- Player 2
+Pular	/ Espaço Player 1
+Pular / ↑ Player 2
+Ataque / F Player 1
+Ataque / 3 Player 2
+         
+📁 Estrutura
+HokaiFantasy/
+│
+├── assets/
+│   └── kitsune/
+│
+├── code/
+├── main.py
+└── README.md
+
+👩‍💻 Autora
+Gabriela Basílio
+
+🎓 ADS
+💻 Desenvolvedora iniciante focada em jogos
+
+⭐ GitHub
+
+👉 https://github.com/gabrielab0
+
 
 
 
