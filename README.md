@@ -46,7 +46,9 @@ python main.py
 
 
 🎯 Controles
+
 Ação	Tecla
+
 Andar	A / D Player 1
 
 Andar ->  <- Player 2
