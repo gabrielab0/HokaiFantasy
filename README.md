@@ -4,7 +4,7 @@
 
 
 <p align="center">
-  <i> A 2D game developed in Python focusing on combat, unique characters, and a fantastic setting.</i>
+  <i> Um jogo 2D desenvolvido em Python com foco em combate, personagens únicos e ambientação fantástica.</i>
 </p>
 
 
@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  ⚔️ Combat • 🎮 Gameplay • 🌄 Adventure • 🦊 Unique Characters
+  ⚔️ Combate • 🎮 Gameplay • 🌄 Aventura • 🦊 Personagens únicos
 </p>
 
 ---
