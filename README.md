@@ -39,16 +39,24 @@
 git clone https://github.com/gabrielab0/HokaiFantasy.git
 
 cd HokaiFantasy
+
 pip install pygame
+
 python main.py
+
 
 🎯 Controles
 Ação	Tecla
 Andar	A / D Player 1
+
 Andar ->  <- Player 2
+
 Pular	/ Espaço Player 1
+
 Pular / ↑ Player 2
+
 Ataque / F Player 1
+
 Ataque / 3 Player 2
          
 📁 Estrutura
