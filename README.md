@@ -47,7 +47,6 @@ python main.py
 
 🎯 Controles
 
-Ação	Tecla
 
 Andar	A / D Player 1
 
